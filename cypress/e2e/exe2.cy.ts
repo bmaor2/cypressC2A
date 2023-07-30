@@ -6,7 +6,7 @@ const ITEM_URL = "https://www.demoblaze.com/prod.html?idp_=";
 //SELECTORS
 const SELECTORS = {
   HEADER_LOGIN_BUTTON: "[id=login2]",
-  HEADER_SHOW_CART_BUTTON: '[id=cartur]',
+  HEADER_SHOW_CART_BUTTON: "[id=cartur]",
   USERNAME_INPUT: "[id=loginusername]",
   PASSWORD_INPUT: "[id=loginpassword]",
   LOGIN_SUBMIT_BUTTON:
@@ -56,23 +56,23 @@ describe("Exercise 2", () => {
     cy.get(SELECTORS.LOGIN_SUBMIT_BUTTON).click();
     cy.wait(500);
     cy.get(SELECTORS.PHONE_GROUP_SELECTOR).click(); // To be sure that I'm at the right place
-    cy.wait(500);
 
     cy.request(GET_ALL_PHONES_REQUEST).then((response) => {
-      //destruct the Items Array from the response Object
+      //Destruct the Items Array from the response Object
       const { Items }: { Items: PhonesArray } = response.body;
 
-      let minPrice: number = 0;
-      let itemID: number = 0;
+      let minPrice: number = Infinity; // Just for implement the number to the biggest number
 
-      Items.reduce((acc, item) => {
-        minPrice = Math.min(item.price, acc.price);
-        itemID = item.price === minPrice ? item.id : acc.id;
+      Items.map((item) => {
+        minPrice = Math.min(minPrice, item.price);
         return item;
-      }); // gets the cheapest phone id
+      }); // Gets the cheapest phone price
 
-      cy.visit(`${ITEM_URL}${itemID}`); // navigate to the cheapest phone page
-      cy.get(`[onClick="addToCart(${itemID})"]`).click(); //click the Add To Cart button
+      const cheapestPhone = Items.find((item) => item.price === minPrice);
+      const { id: cheapestPhoneId } = cheapestPhone!; // Gets the cheapest phone id
+
+      cy.visit(`${ITEM_URL}${cheapestPhoneId}`); // Navigate to the cheapest phone page
+      cy.get(`[onClick="addToCart(${cheapestPhoneId})"]`).click(); // Click the Add To Cart button
     });
 
     cy.get(SELECTORS.HEADER_SHOW_CART_BUTTON).click();
