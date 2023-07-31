@@ -9,7 +9,7 @@ describe("Exercise 1:", async () => {
   it("Should compare between 2 PDF files and assert true if they are equal", () => {
     cy.readFile(FILE_1_PATH, "base64").then((file1) => {
       cy.readFile(FILE_3_PATH, "base64").then((file2) => {
-        cy.log("Is the files equals?: " + String(file1 === file2));
+        cy.log("Are the files equal?: " + String(file1 === file2));
       });
     });
   });
