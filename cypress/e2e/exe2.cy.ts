@@ -9,8 +9,7 @@ const SELECTORS = {
   HEADER_SHOW_CART_BUTTON: "[id=cartur]",
   USERNAME_INPUT: "[id=loginusername]",
   PASSWORD_INPUT: "[id=loginpassword]",
-  LOGIN_SUBMIT_BUTTON:
-    "#logInModal > .modal-dialog > .modal-content > .modal-footer > .btn-primary",
+  LOGIN_SUBMIT_BUTTON: `[onclick="logIn()"]`,
   PHONE_GROUP_SELECTOR: `[onclick="byCat('phone')"]`,
 };
 
