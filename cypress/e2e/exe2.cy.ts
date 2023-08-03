@@ -55,6 +55,7 @@ describe("Exercise 2", () => {
     cy.get(SELECTORS.LOGIN_SUBMIT_BUTTON).click();
     cy.wait(500);
     cy.get(SELECTORS.PHONE_GROUP_SELECTOR).click(); // To be sure that I'm at the right place
+    cy.wait(500);
 
     cy.request(GET_ALL_PHONES_REQUEST).then((response) => {
       //Destruct the Items Array from the response Object
