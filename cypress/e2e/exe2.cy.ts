@@ -36,24 +36,11 @@ describe("Exercise 2", () => {
   });
 
   it("Task 2, Should Login", () => {
-    cy.visit(MAIN_URL);
-    cy.get(SELECTORS.HEADER_LOGIN_BUTTON).click();
-    cy.wait(500);
-    cy.get(SELECTORS.USERNAME_INPUT).click().type(VALID_USER.USERNAME);
-    cy.wait(500);
-    cy.get(SELECTORS.PASSWORD_INPUT).click().type(VALID_USER.PASSWORD);
-    cy.get(SELECTORS.LOGIN_SUBMIT_BUTTON).click();
+    Login();
   });
 
   it("Task 3, Should Add the cheapest phone to cart", () => {
-    cy.visit(MAIN_URL);
-    cy.get(SELECTORS.HEADER_LOGIN_BUTTON).click();
-    cy.wait(500);
-    cy.get(SELECTORS.USERNAME_INPUT).click().type(VALID_USER.USERNAME);
-    cy.wait(500);
-    cy.get(SELECTORS.PASSWORD_INPUT).click().type(VALID_USER.PASSWORD);
-    cy.get(SELECTORS.LOGIN_SUBMIT_BUTTON).click();
-    cy.wait(500);
+    Login();
     cy.get(SELECTORS.PHONE_GROUP_SELECTOR).click(); // To be sure that I'm at the right place
 
     cy.request(GET_ALL_PHONES_REQUEST).then((response) => {
@@ -77,3 +64,14 @@ describe("Exercise 2", () => {
     cy.get(SELECTORS.HEADER_SHOW_CART_BUTTON).click();
   });
 });
+
+function Login() {
+  cy.visit(MAIN_URL);
+  cy.get(SELECTORS.HEADER_LOGIN_BUTTON).click();
+  cy.wait(500);
+  cy.get(SELECTORS.USERNAME_INPUT).click().type(VALID_USER.USERNAME);
+  cy.wait(500);
+  cy.get(SELECTORS.PASSWORD_INPUT).click().type(VALID_USER.PASSWORD);
+  cy.get(SELECTORS.LOGIN_SUBMIT_BUTTON).click();
+  cy.wait(500);
+}
