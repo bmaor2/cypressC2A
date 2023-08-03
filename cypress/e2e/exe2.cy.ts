@@ -1,7 +1,7 @@
 //URLS
 const MAIN_URL = "https://www.demoblaze.com";
 const API_PATH = "https://api.demoblaze.com/bycat";
-const ITEM_URL = "https://www.demoblaze.com/prod.html?idp_=";
+const ITEM_URL = "https://www.demoblaze.com/prod.html?idp_";
 
 //SELECTORS
 const SELECTORS = {
@@ -70,7 +70,7 @@ describe("Exercise 2", () => {
       const cheapestPhone = Items.find((item) => item.price === minPrice);
       const { id: cheapestPhoneId } = cheapestPhone!; // Gets the cheapest phone id
 
-      cy.visit(`${ITEM_URL}${cheapestPhoneId}`); // Navigate to the cheapest phone page
+      cy.visit(`${ITEM_URL}=${cheapestPhoneId}`); // Navigate to the cheapest phone page
       cy.get(`[onClick="addToCart(${cheapestPhoneId})"]`).click(); // Click the Add To Cart button
     });
 
